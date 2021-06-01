@@ -1,10 +1,8 @@
-const express = require('express');
-const path= require('path');
-const multer  = require('multer')
-const upload = multer()
-const passport= require('passport')
-const session= require('express-session')
-const cors=  require('cors');
+import express from 'express';
+import passport from 'passport';
+import session from 'express-session';
+import cors from 'cors';
+import path from 'path';
 
 const app = express();
 
@@ -32,7 +30,7 @@ app.use(
 );
 
 app.get('/', (req,res)=>{
-    res.sendFile('./public/index.html', { root: __dirname });                               
+    res.sendFile('../public/index.html', { root: __dirname });                               
 })
 
 //router
