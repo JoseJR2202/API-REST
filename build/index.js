@@ -3,10 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("./config/alias");
 const express_1 = __importDefault(require("express"));
 const passport_1 = __importDefault(require("passport"));
 const express_session_1 = __importDefault(require("express-session"));
 const cors_1 = __importDefault(require("cors"));
+const routes_1 = __importDefault(require("./routes"));
 const app = express_1.default();
 app.set('port', process.env.PORT || 3000);
 app.use(express_session_1.default({
@@ -29,6 +31,7 @@ app.get('/', (req, res) => {
     res.sendFile('../public/index.html', { root: __dirname });
 });
 //router
+app.use('/', routes_1.default);
 app.use((req, res) => {
     res.status(404).send({ 'message': 'Errorrrrr 404' });
 });

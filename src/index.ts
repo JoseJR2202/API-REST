@@ -1,8 +1,10 @@
+import './config/alias'
 import express from 'express';
 import passport from 'passport';
 import session from 'express-session';
 import cors from 'cors';
 import path from 'path';
+import router from './routes'
 
 const app = express();
 
@@ -34,6 +36,7 @@ app.get('/', (req,res)=>{
 })
 
 //router
+app.use('/',router);
 
 app.use((req, res) => {
     res.status(404).send({'message': 'Errorrrrr 404'});

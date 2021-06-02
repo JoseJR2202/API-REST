@@ -1,6 +1,7 @@
 export interface Proveedor {
     id: number;
     nombre: string;
-    direccion:string;
+    direccion: string;
     contacto: string;
-  }
+}
+//# sourceMappingURL=Proveedor.d.ts.map
