@@ -4,7 +4,7 @@ import productos from './producto';
 import proveedor from './proveedor'
 import auth from './auth'
 import file from './file'
-import { isLogged, isAuth } from '@validations/auth';
+import { isAuth } from '@validations/auth';
 
 const router = Router();
 

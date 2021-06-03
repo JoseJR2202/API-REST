@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getEmpleados,getEmpleados_id,getEmpleados_correo,deleteEmpleados,updateEmpleados} from '@helpers/Empleos';
+import { getEmpleados,getEmpleados_id,deleteEmpleados,updateEmpleados} from '@helpers/Empleos';
 import {insertEmpleado} from '@helpers/auth'
 import {FieldsValidation_signUpEmpleados,FieldsValidation_updateEmpleados,checkResult} from '@validations/fields'
 
@@ -18,16 +18,6 @@ router.get('/:id', async(req,res)=>{
     const {id}=req.params;
     try {
         const data = await getEmpleados_id(+id);
-        res.status(200).json({ status: 200, usuarios: data, message: 'Empleado obtenido!' });
-    } catch (e) {
-        res.status(500).json({ status: 500, error: e, message: 'Error al obtener al empleado' });
-    }
-});
-
-router.get('/buscar/:correo', async(req,res)=>{
-    const {correo}=req.params;
-    try {
-        const data = await getEmpleados_correo(correo);
         res.status(200).json({ status: 200, usuarios: data, message: 'Empleado obtenido!' });
     } catch (e) {
         res.status(500).json({ status: 500, error: e, message: 'Error al obtener al empleado' });

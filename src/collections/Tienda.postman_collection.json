@@ -1,0 +1,613 @@
+{
+	"info": {
+		"_postman_id": "24599056-0bb6-40d4-a8bd-dfec2eb7c0c8",
+		"name": "Tienda",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Empleados",
+			"item": [
+				{
+					"name": "lista_empleados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/empleados",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"empleados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregar_empleados",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nombre",
+									"value": "Jose Jimenez",
+									"type": "text"
+								},
+								{
+									"key": "correo",
+									"value": "jose@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "telefono",
+									"value": "04147181663",
+									"type": "text"
+								},
+								{
+									"key": "contrasena",
+									"value": "Samuel0403",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/empleados/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"empleados",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "aditar_empleados",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nombre",
+									"value": "Jose Revilla",
+									"type": "text"
+								},
+								{
+									"key": "correo",
+									"value": "Revilla@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "telefono",
+									"value": "04147181663",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/empleados/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"empleados",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar_empleados",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/empleados/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"empleados",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar_empleado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/empleados/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"empleados",
+								"9"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "Lista_productos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/producto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"producto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregar_producto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nombre",
+									"value": "pan de ciruels",
+									"type": "text"
+								},
+								{
+									"key": "descripcion",
+									"value": "pan.. de.. ciruela",
+									"type": "text"
+								},
+								{
+									"key": "precio_compra",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "precio_venta",
+									"value": "220.74",
+									"type": "text"
+								},
+								{
+									"key": "id_proveedor",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/producto/agregar",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"producto",
+								"agregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editar_producto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nombre",
+									"value": "pan de ciruelas rojas",
+									"type": "text"
+								},
+								{
+									"key": "descripcion",
+									"value": "pan.. de.. ciruelas... rojas...",
+									"type": "text"
+								},
+								{
+									"key": "precio_compra",
+									"value": "178.98",
+									"type": "text"
+								},
+								{
+									"key": "precio_venta",
+									"value": "200.74",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/producto/12",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"producto",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar_producto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/producto/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"producto",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar_producto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/producto/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"producto",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Proveedor",
+			"item": [
+				{
+					"name": "lista_proveedores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/proveedores",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"proveedores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agregar_proveedor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nombre",
+									"value": "santana",
+									"type": "text"
+								},
+								{
+									"key": "direccion",
+									"value": "por alli",
+									"type": "text"
+								},
+								{
+									"key": "contacto",
+									"value": "panaderia_santana@gmail.com",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/proveedores/agregar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"proveedores",
+								"agregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar_proveedor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/proveedores/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"proveedores",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar_proveedor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nombre",
+									"value": "SantaAna",
+									"type": "text"
+								},
+								{
+									"key": "direccion",
+									"value": "lejos",
+									"type": "text"
+								},
+								{
+									"key": "contacto",
+									"value": "panaderia_santana@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/proveedores/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"proveedores",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar_proveedor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/proveedores/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"proveedores",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "agregar_empleados",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nombre",
+									"value": "Jose Jimenez",
+									"type": "text"
+								},
+								{
+									"key": "correo",
+									"value": "josejr22@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "telefono",
+									"value": "04147181663",
+									"type": "text"
+								},
+								{
+									"key": "contrasena",
+									"value": "Samuel0403",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "iniciar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "correo",
+									"value": "josejr22@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "contrasena",
+									"value": "Samuel0403",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/ingresar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"ingresar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Salir",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Files",
+			"item": [
+				{
+					"name": "upload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/file/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"file",
+								"product"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
