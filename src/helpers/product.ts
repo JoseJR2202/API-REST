@@ -1,6 +1,6 @@
 import Pool from '@utils/pool';
 import {querys_producto} from '@utils/querys';
-import { Producto_detalles,Producto_nuevo } from '@interfaces/Producto';
+import {Producto, Producto_detalles,Producto_nuevo } from '@interfaces/Producto';
 import { PoolClient } from 'pg';
 
 const pool = Pool.getInstance();
@@ -8,7 +8,6 @@ const pool = Pool.getInstance();
 //agregar un producto
 export const insertProducto= async (product: Producto_nuevo): Promise<Producto_nuevo> =>{
     const {nombre,descripcion,precio_compra,precio_venta,id_proveedor}= product;
-    console.log(nombre,descripcion,precio_compra,precio_venta,id_proveedor);
     const client: PoolClient = await pool.connect();
     try {
         await client.query('BEGIN');
@@ -75,32 +74,10 @@ export const getProductos_ID= async ( id: number ): Promise<Producto_detalles> =
     }
 }
 
-//obtener producto por su nombre
-export const getProductos_name= async ( name:string  ): Promise<Producto_detalles> =>{
-    const client: PoolClient = await pool.connect();
-    try {
-        const response= (await client.query(querys_producto.GET_producto_BY_NAME,[name])).rows[0];
-        const productos: Producto_detalles={
-                id:response.id_producto,
-                nombre:response.nombre,
-                descripcion:response.descripcion,
-                precio_compra:response.precio_compra,
-                precio_venta:response.precio_venta,
-                nombre_proveedor:response.nombre_proveedor
-        }
-        return productos;
-    } catch (e) {
-        throw e;
-    } finally {
-      client.release();
-    }
-}
-
 //actualizar producto
 export const updateProductos= async ({product, ide }: {product:Producto_nuevo,  ide: number }): Promise<Producto_nuevo> =>{
     const {nombre,descripcion,precio_compra,precio_venta}= product;
     const client: PoolClient = await pool.connect();
-    console.log(nombre,descripcion,ide)
     try {
         await client.query('BEGIN');
         const response= (await client.query(querys_producto.UPDATE_producto,[nombre,descripcion,precio_compra,precio_venta,ide])).rows[0];

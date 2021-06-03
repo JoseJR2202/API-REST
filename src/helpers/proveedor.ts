@@ -68,25 +68,6 @@ export const getProveedor_id= async ( id: number ): Promise<Proveedor> =>{
     }
 }
 
-//obtener Proveedor por su nombres... cuestionable la utilidad de esta
-export const getProveedor_name= async ( nombre: string ): Promise<Proveedor> =>{
-    const client: PoolClient = await pool.connect();
-    try {
-        const response= (await client.query(querys_proveedor.GET_proveedor_BY_NAME,[nombre])).rows[0];
-        const proveedor: Proveedor= {
-                id:response.id_proveedor,
-                nombre:response.nombre,
-                contacto:response.contacto,
-                direccion:response.direccion
-        }
-        return proveedor;
-    } catch (e) {
-        throw e;
-    } finally {
-      client.release();
-    }
-}
-
 //actualizar Proveedor
 export const updateProveedor= async ({ prov, ide }: { prov: Proveedor; ide: number }): Promise<Proveedor> =>{
     const {nombre,contacto,direccion}= prov;

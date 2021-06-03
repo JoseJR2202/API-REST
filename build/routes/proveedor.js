@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const proveedor_1 = require("@helpers/proveedor");
+const fields_1 = require("@validations/fields");
 const router = express_1.Router();
 router.get('/', async (req, res) => {
     try {
@@ -22,17 +23,7 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({ status: 500, error: e, message: 'Error al obtener el Proveedor' });
     }
 });
-router.get('/buscar/:name', async (req, res) => {
-    const { name } = req.params;
-    try {
-        const data = await proveedor_1.getProveedor_name(name);
-        res.status(200).json({ status: 200, Proveedor: data, message: 'Proveedor obtenido!' });
-    }
-    catch (e) {
-        res.status(500).json({ status: 500, error: e, message: 'Error al obtener el Proveedor' });
-    }
-});
-router.post('/agregar', async (req, res) => {
+router.post('/agregar', fields_1.FieldsValidation_Proveedores, fields_1.checkResult, async (req, res) => {
     try {
         const data = await proveedor_1.insertProveedor(req.body);
         res.status(200).json({ status: 200, Proveedor: data, message: 'Proveedor agregado!' });
@@ -41,7 +32,7 @@ router.post('/agregar', async (req, res) => {
         res.status(500).json({ status: 500, error: e, message: 'Error al actualizar el Proveedor' });
     }
 });
-router.put('/:id', async (req, res) => {
+router.put('/:id', fields_1.FieldsValidation_Proveedores, fields_1.checkResult, async (req, res) => {
     const { id } = req.params;
     try {
         const data = await proveedor_1.updateProveedor({ prov: req.body, ide: +id });

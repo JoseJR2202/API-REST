@@ -3,35 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteEmpleados = exports.updateEmpleados = exports.getEmpleados_name = exports.getEmpleados_id = exports.getEmpleados = exports.insertEmpleado = void 0;
+exports.deleteEmpleados = exports.updateEmpleados = exports.getEmpleados_correo = exports.getEmpleados_id = exports.getEmpleados = void 0;
 const pool_1 = __importDefault(require("@utils/pool"));
 const querys_1 = require("@utils/querys");
 const pool = pool_1.default.getInstance();
-//agregar un empleados
-exports.insertEmpleado = async (emp) => {
-    const { nombre, correo, telefono, contrasena } = emp;
-    const client = await pool.connect();
-    try {
-        await client.query('BEGIN');
-        const response = (await client.query(querys_1.querys_empleados.SIGN_UP_empleados, [nombre, correo, contrasena, telefono])).rows[0];
-        const empleados = {
-            id: response.id_empleados,
-            nombre: response.nombre,
-            correo: response.correo,
-            telefono: response.telefono,
-            contrasena: response.contrasena
-        };
-        await client.query('COMMIT');
-        return empleados;
-    }
-    catch (e) {
-        await client.query('ROLLBACK');
-        throw e;
-    }
-    finally {
-        client.release();
-    }
-};
 //obtener la lista de empleados
 exports.getEmpleados = async () => {
     const client = await pool.connect();
@@ -75,25 +50,18 @@ exports.getEmpleados_id = async (id) => {
     }
 };
 //obtener empleados por su nombres... cuestionable la utilidad de esta
-exports.getEmpleados_name = async (nombre) => {
+exports.getEmpleados_correo = async (nombre) => {
     const client = await pool.connect();
     try {
-        const response = (await client.query(querys_1.querys_empleados.GET_empleados_BY_NAME, [nombre])).rows[0];
+        const response = (await client.query(querys_1.querys_empleados.GET_empleados_BY_CORREO, [nombre])).rows[0];
         const empleados = {
             id: response.id_empleados,
             nombre: response.nombre,
             correo: response.correo,
-            telefono: response.telefono
+            telefono: response.telefono,
+            contrasena: response.contrasena
         };
         return empleados;
-        // const empleados: Empleados[]= response.map((rows)=>{
-        //     return{
-        //         id:rows.id_empleados,
-        //         nombre:rows.nombre,
-        //         correo:rows.correo
-        //     }
-        // })
-        // return empleados;
     }
     catch (e) {
         throw e;

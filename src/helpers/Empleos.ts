@@ -5,30 +5,6 @@ import { PoolClient } from 'pg';
 
 const pool = Pool.getInstance();
 
-//agregar un empleados
-export const insertEmpleado= async (emp: EmpleadosLogin): Promise<EmpleadosLogin> =>{
-    const {nombre,correo,telefono,contrasena}= emp;
-    const client: PoolClient = await pool.connect();
-    try {
-        await client.query('BEGIN');
-        const response= (await client.query(querys_empleados.SIGN_UP_empleados,[nombre,correo,contrasena,telefono])).rows[0];
-        const empleados: EmpleadosLogin= {
-            id:response.id_empleados,
-            nombre:response.nombre,
-            correo:response.correo,
-            telefono:response.telefono,
-            contrasena:response.contrasena
-    };
-        await client.query('COMMIT');
-        return empleados;
-    } catch (e) {
-        await client.query('ROLLBACK');
-        throw e;
-    } finally {
-      client.release();
-    }
-}
-
 //obtener la lista de empleados
 export const getEmpleados= async (): Promise<Empleados[]> =>{
     const client: PoolClient = await pool.connect();
@@ -70,25 +46,18 @@ export const getEmpleados_id= async ( id: number ): Promise<Empleados> =>{
 }
 
 //obtener empleados por su nombres... cuestionable la utilidad de esta
-export const getEmpleados_name= async ( nombre: string ): Promise<Empleados> =>{
+export const getEmpleados_correo= async ( nombre: string ): Promise<EmpleadosLogin> =>{
     const client: PoolClient = await pool.connect();
     try {
-        const response= (await client.query(querys_empleados.GET_empleados_BY_NAME,[nombre])).rows[0];
-        const empleados: Empleados= {
+        const response= (await client.query(querys_empleados.GET_empleados_BY_CORREO,[nombre])).rows[0];
+        const empleados: EmpleadosLogin= {
                 id:response.id_empleados,
                 nombre:response.nombre,
                 correo:response.correo,
-                telefono:response.telefono
+                telefono:response.telefono,
+                contrasena:response.contrasena
         }
         return empleados;
-        // const empleados: Empleados[]= response.map((rows)=>{
-        //     return{
-        //         id:rows.id_empleados,
-        //         nombre:rows.nombre,
-        //         correo:rows.correo
-        //     }
-        // })
-        // return empleados;
     } catch (e) {
         throw e;
     } finally {

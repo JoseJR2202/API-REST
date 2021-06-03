@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteProveedor = exports.updateProveedor = exports.getProveedor_name = exports.getProveedor_id = exports.getProveedores = exports.insertProveedor = void 0;
+exports.deleteProveedor = exports.updateProveedor = exports.getProveedor_id = exports.getProveedores = exports.insertProveedor = void 0;
 const pool_1 = __importDefault(require("@utils/pool"));
 const querys_1 = require("@utils/querys");
 const pool = pool_1.default.getInstance();
@@ -58,26 +58,6 @@ exports.getProveedor_id = async (id) => {
     const client = await pool.connect();
     try {
         const response = (await client.query(querys_1.querys_proveedor.GET_proveedor_BY_ID, [id])).rows[0];
-        const proveedor = {
-            id: response.id_proveedor,
-            nombre: response.nombre,
-            contacto: response.contacto,
-            direccion: response.direccion
-        };
-        return proveedor;
-    }
-    catch (e) {
-        throw e;
-    }
-    finally {
-        client.release();
-    }
-};
-//obtener Proveedor por su nombres... cuestionable la utilidad de esta
-exports.getProveedor_name = async (nombre) => {
-    const client = await pool.connect();
-    try {
-        const response = (await client.query(querys_1.querys_proveedor.GET_proveedor_BY_NAME, [nombre])).rows[0];
         const proveedor = {
             id: response.id_proveedor,
             nombre: response.nombre,

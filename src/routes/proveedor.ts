@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import {getProveedores,getProveedor_id,getProveedor_name,insertProveedor,updateProveedor,deleteProveedor} from '@helpers/proveedor'
+import {getProveedores,getProveedor_id,insertProveedor,updateProveedor,deleteProveedor} from '@helpers/proveedor'
+import {FieldsValidation_Proveedores,checkResult} from '@validations/fields'
 
 const router = Router();
 
@@ -22,17 +23,7 @@ router.get('/:id', async(req,res)=>{
     }
 });
 
-router.get('/buscar/:name', async(req,res)=>{
-    const {name}=req.params;
-    try {
-        const data = await getProveedor_name(name);
-        res.status(200).json({ status: 200, Proveedor: data, message: 'Proveedor obtenido!' });
-    } catch (e) {
-        res.status(500).json({ status: 500, error: e, message: 'Error al obtener el Proveedor' });
-    }
-});
-
-router.post('/agregar',async(req,res)=>{
+router.post('/agregar',FieldsValidation_Proveedores,checkResult,async(req,res)=>{
     try {
         const data = await insertProveedor(req.body);
         res.status(200).json({ status: 200, Proveedor: data, message: 'Proveedor agregado!' });
@@ -41,7 +32,7 @@ router.post('/agregar',async(req,res)=>{
     }
 })
 
-router.put('/:id',async(req,res)=>{
+router.put('/:id',FieldsValidation_Proveedores,checkResult,async(req,res)=>{
     const {id}=req.params;
     try {
         const data = await updateProveedor({prov: req.body, ide:+id});

@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const Empleos_1 = require("@helpers/Empleos");
+const auth_1 = require("@helpers/auth");
+const fields_1 = require("@validations/fields");
 const router = express_1.Router();
 router.get('/', async (req, res) => {
     try {
@@ -22,26 +24,26 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({ status: 500, error: e, message: 'Error al obtener al empleado' });
     }
 });
-router.get('/buscar/:name', async (req, res) => {
-    const { name } = req.params;
+router.get('/buscar/:correo', async (req, res) => {
+    const { correo } = req.params;
     try {
-        const data = await Empleos_1.getEmpleados_name(name);
+        const data = await Empleos_1.getEmpleados_correo(correo);
         res.status(200).json({ status: 200, usuarios: data, message: 'Empleado obtenido!' });
     }
     catch (e) {
         res.status(500).json({ status: 500, error: e, message: 'Error al obtener al empleado' });
     }
 });
-router.post('/registrar', async (req, res) => {
+router.post('/registrar', fields_1.FieldsValidation_signUpEmpleados, fields_1.checkResult, async (req, res) => {
     try {
-        const data = await Empleos_1.insertEmpleado(req.body);
+        const data = await auth_1.insertEmpleado(req.body);
         res.status(200).json({ status: 200, usuarios: data, message: 'Empleado agregado!' });
     }
     catch (e) {
         res.status(500).json({ status: 500, error: e, message: 'Error al actualizar al empleado' });
     }
 });
-router.put('/:id', async (req, res) => {
+router.put('/:id', fields_1.FieldsValidation_updateEmpleados, fields_1.checkResult, async (req, res) => {
     const { id } = req.params;
     try {
         const data = await Empleos_1.updateEmpleados({ emple: req.body, ide: +id });

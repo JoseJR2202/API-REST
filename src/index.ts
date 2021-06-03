@@ -4,6 +4,7 @@ import passport from 'passport';
 import session from 'express-session';
 import cors from 'cors';
 import path from 'path';
+import { LocalStrategy, JwtStrategy } from '@utils/strategies';
 import router from './routes'
 
 const app = express();
@@ -19,6 +20,18 @@ app.use(session({
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
+
+passport.use('jwt', JwtStrategy);
+passport.use(LocalStrategy);
+
+passport.serializeUser((user, done) => {
+  done(null, JSON.stringify(user));
+});
+
+passport.deserializeUser((user: string, done) => {
+  done(null, JSON.parse(user));
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -39,7 +52,7 @@ app.get('/', (req,res)=>{
 app.use('/',router);
 
 app.use((req, res) => {
-    res.status(404).send({'message': 'Errorrrrr 404'});
+    res.status(404).send({'message': 'ERROR 404'});
 });
 
 app.listen(app.get('port'), ()=>{
