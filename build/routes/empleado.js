@@ -24,16 +24,6 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({ status: 500, error: e, message: 'Error al obtener al empleado' });
     }
 });
-router.get('/buscar/:correo', async (req, res) => {
-    const { correo } = req.params;
-    try {
-        const data = await Empleos_1.getEmpleados_correo(correo);
-        res.status(200).json({ status: 200, usuarios: data, message: 'Empleado obtenido!' });
-    }
-    catch (e) {
-        res.status(500).json({ status: 500, error: e, message: 'Error al obtener al empleado' });
-    }
-});
 router.post('/registrar', fields_1.FieldsValidation_signUpEmpleados, fields_1.checkResult, async (req, res) => {
     try {
         const data = await auth_1.insertEmpleado(req.body);
