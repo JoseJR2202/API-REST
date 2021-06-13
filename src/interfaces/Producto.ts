@@ -1,15 +1,15 @@
-export interface Producto {
+export interface producto {
     id: number;
     nombre: string;
     descripcion: string;
-    precio_compra:number;
-    precio_venta:number;
+    precioCompra:number;
+    precioVenta:number;
   }
 
-export interface Producto_nuevo extends Producto{
-  id_proveedor: number;
+export interface productoNuevo extends producto{
+  idProveedor: number;
 }
 
-export interface Producto_detalles extends Producto{
-  nombre_proveedor:string;
+export interface productoDetalles extends producto{
+  nombreProveedor:string;
 }

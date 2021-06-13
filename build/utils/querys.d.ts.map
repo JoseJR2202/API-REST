@@ -1,1 +1,1 @@
-{"version":3,"file":"querys.d.ts","sourceRoot":"./src/","sources":["utils/querys.ts"],"names":[],"mappings":"AAGA,QAAA,MAAM,gBAAgB;;;;;;;CAOnB,CAAC;AAEF,QAAA,MAAM,eAAe;;;;;;CAMpB,CAAC;AAEF,QAAA,MAAM,gBAAgB;;;;;;CAMrB,CAAC;AAGF,OAAO,EAAC,gBAAgB,EAAC,eAAe,EAAC,gBAAgB,EAAE,CAAC"}
+{"version":3,"file":"querys.d.ts","sourceRoot":"./src/","sources":["utils/querys.ts"],"names":[],"mappings":"AAGA,QAAA,MAAM,eAAe;;;;;;;CAOlB,CAAC;AAEF,QAAA,MAAM,cAAc;;;;;;CAMnB,CAAC;AAEF,QAAA,MAAM,eAAe;;;;;;CAMpB,CAAC;AAGF,OAAO,EAAC,eAAe,EAAC,cAAc,EAAC,eAAe,EAAE,CAAC"}

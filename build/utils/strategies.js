@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateToken = exports.JwtStrategy = exports.LocalStrategy = void 0;
-const auth_1 = require("@helpers/auth");
-const Empleos_1 = require("@helpers/Empleos");
+const auth_helper_1 = require("@helpers/auth.helper");
+const empleados_helper_1 = require("@helpers/empleados.helper");
 const passport_local_1 = require("passport-local");
 const passport_jwt_1 = require("passport-jwt");
 const jwt_simple_1 = require("jwt-simple");
@@ -12,10 +12,10 @@ const localOptions = {
 };
 const LocalStrategy = new passport_local_1.Strategy(localOptions, async (correo, contrasena, done) => {
     try {
-        const user = await Empleos_1.getEmpleados_correo(correo);
+        const user = await empleados_helper_1.getEmpleados_correo(correo);
         if (!user)
             return done(null, false);
-        const isMatch = await auth_1.comparePassword(contrasena, user.contrasena);
+        const isMatch = await auth_helper_1.comparePassword(contrasena, user.contrasena);
         console.log(isMatch);
         return isMatch ? done(null, { ...user, contrasena: undefined }) : done(null, false);
     }

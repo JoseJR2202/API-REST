@@ -1,24 +1,24 @@
 import Pool from '@utils/pool';
-import {querys_producto} from '@utils/querys';
-import {Producto, Producto_detalles,Producto_nuevo } from '@interfaces/Producto';
+import {querysProducto} from '@utils/querys';
+import {producto, productoDetalles,productoNuevo } from '@interfaces/producto';
 import { PoolClient } from 'pg';
 
 const pool = Pool.getInstance();
 
 //agregar un producto
-export const insertProducto= async (product: Producto_nuevo): Promise<Producto_nuevo> =>{
-    const {nombre,descripcion,precio_compra,precio_venta,id_proveedor}= product;
+export const insertProducto= async (product: productoNuevo): Promise<productoNuevo> =>{
+    const {nombre,descripcion,precioCompra,precioVenta,idProveedor}= product;
     const client: PoolClient = await pool.connect();
     try {
         await client.query('BEGIN');
-        const response= (await client.query(querys_producto.SIGN_UP_producto,[nombre,descripcion,precio_compra,precio_venta,id_proveedor])).rows[0];
-        const producto: Producto_nuevo= {
+        const response= (await client.query(querysProducto.SIGN_UP_producto,[nombre,descripcion,precioCompra,precioVenta,idProveedor])).rows[0];
+        const producto: productoNuevo= {
             id:response.id_producto,
             nombre:response.nombre,
             descripcion:response.descripcion,
-            precio_compra:response.precio_compra,
-            precio_venta:response.precio_venta,
-            id_proveedor:response.id_proveedor
+            precioCompra:response.precio_compra,
+            precioVenta:response.precio_venta,
+            idProveedor:response.id_proveedor
         };
         await client.query('COMMIT');
         return producto;
@@ -31,18 +31,18 @@ export const insertProducto= async (product: Producto_nuevo): Promise<Producto_n
 }
 
 //obtener lista de productos
-export const getProductos= async (): Promise<Producto_detalles[]> =>{
+export const getProductos= async (): Promise<productoDetalles[]> =>{
     const client: PoolClient = await pool.connect();
     try {
-        const response= (await client.query(querys_producto.GET_producto)).rows;
-        const productos: Producto_detalles[]= response.map((rows)=>{
+        const response= (await client.query(querysProducto.GET_producto)).rows;
+        const productos:productoDetalles[]= response.map((rows)=>{
             return{
                 id:rows.id_producto,
                 nombre:rows.nombre,
                 descripcion:rows.descripcion,
-                precio_compra:rows.precio_compra,
-                precio_venta:rows.precio_venta,
-                nombre_proveedor:rows.nombre_proveedor
+                precioCompra:rows.precio_compra,
+                precioVenta:rows.precio_venta,
+                nombreProveedor:rows.nombre_proveedor
             }
         })
         return productos;
@@ -54,17 +54,17 @@ export const getProductos= async (): Promise<Producto_detalles[]> =>{
 }
 
 //obtener un producto por su id
-export const getProductos_ID= async ( id: number ): Promise<Producto_detalles> =>{
+export const getProductos_ID= async ( id: number ): Promise<productoDetalles> =>{
     const client: PoolClient = await pool.connect();
     try {
-        const response= (await client.query(querys_producto.GET_producto_BY_ID,[id])).rows[0];
-        const productos:Producto_detalles= {
+        const response= (await client.query(querysProducto.GET_producto_BY_ID,[id])).rows[0];
+        const productos:productoDetalles= {
                 id:response.id_producto,
                 nombre:response.nombre,
                 descripcion:response.descripcion,
-                precio_compra:response.precio_compra,
-                precio_venta:response.precio_venta,
-                nombre_proveedor:response.nombre_proveedor
+                precioCompra:response.precio_compra,
+                precioVenta:response.precio_venta,
+                nombreProveedor:response.nombre_proveedor
         }
         return productos;
     } catch (e) {
@@ -75,19 +75,19 @@ export const getProductos_ID= async ( id: number ): Promise<Producto_detalles> =
 }
 
 //actualizar producto
-export const updateProductos= async ({product, ide }: {product:Producto_nuevo,  ide: number }): Promise<Producto_nuevo> =>{
-    const {nombre,descripcion,precio_compra,precio_venta}= product;
+export const updateProductos= async ({product, ide }: {product:productoNuevo,  ide: number }): Promise<productoNuevo> =>{
+    const {nombre,descripcion,precioCompra,precioVenta}= product;
     const client: PoolClient = await pool.connect();
     try {
         await client.query('BEGIN');
-        const response= (await client.query(querys_producto.UPDATE_producto,[nombre,descripcion,precio_compra,precio_venta,ide])).rows[0];
-        const productos: Producto_nuevo= {
+        const response= (await client.query(querysProducto.UPDATE_producto,[nombre,descripcion,precioCompra,precioVenta,ide])).rows[0];
+        const productos: productoNuevo= {
                 id:response.id_producto,
                 nombre:response.nombre,
                 descripcion:response.descripcion,
-                precio_compra:response.precio_compra,
-                precio_venta:response.precio_venta,
-                id_proveedor:response.id_proveedor
+                precioCompra:response.precio_compra,
+                precioVenta:response.precio_venta,
+                idProveedor:response.id_proveedor
         }
         await client.query('COMMIT');
         return productos;
@@ -104,7 +104,7 @@ export const deleteProducto= async ( id: number ): Promise<boolean> =>{
     const client: PoolClient = await pool.connect();
     try {
         await client.query('BEGIN');
-        const response= (await client.query(querys_producto.DELETE_producto,[id])).rowCount>0;
+        const response= (await client.query(querysProducto.DELETE_producto,[id])).rowCount>0;
         await client.query('COMMIT');
         return response;
     } catch (e) {

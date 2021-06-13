@@ -1,5 +1,5 @@
-import { comparePassword } from '@helpers/auth';
-import {getEmpleados_correo} from '@helpers/Empleos'
+import { comparePassword } from '@helpers/auth.helper';
+import {getEmpleados_correo} from '@helpers/empleados.helper'
 import { Strategy as Local } from 'passport-local';
 import { Strategy as JWT, ExtractJwt } from 'passport-jwt';
 import { encode } from 'jwt-simple';

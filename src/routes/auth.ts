@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { insertEmpleado } from '@helpers/auth';
+import { insertEmpleado } from '@helpers/auth.helper';
 import { authenticate } from 'passport';
-import {FieldsValidation_loginEmpleados,FieldsValidation_signUpEmpleados,checkResult} from '@validations/fields'
+import {fieldsValidationLoginEmpleados,fieldsValidationSignUpEmpleados,checkResult} from '@validations/fields'
 import { generateToken } from '@utils/strategies';
 import { isLogged, isAuth } from '@validations/auth';
 
@@ -12,7 +12,7 @@ router.get('/logout', isAuth, (req: any, res) => {
     res.json({ status: 200, message: 'Sesión finalizada.' });
 });
 
-router.post('/registrar',isLogged,FieldsValidation_signUpEmpleados,checkResult,async(req,res)=>{
+router.post('/registrar',isLogged,fieldsValidationSignUpEmpleados,checkResult,async(req,res)=>{
     try {
         const data = await insertEmpleado(req.body);
         res.status(200).json({ status: 200, usuarios: data, message: 'Empleado agregado!' });
@@ -21,7 +21,7 @@ router.post('/registrar',isLogged,FieldsValidation_signUpEmpleados,checkResult,a
     }
 });
 
-router.post('/ingresar', isLogged,FieldsValidation_loginEmpleados, checkResult, authenticate('local'), async (req: any, res) => {
+router.post('/ingresar', isLogged,fieldsValidationLoginEmpleados, checkResult, authenticate('local'), async (req: any, res) => {
     res.status(200).json({
     status: 200,
     message: 'Inicio de sesion exitoso',

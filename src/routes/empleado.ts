@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { getEmpleados,getEmpleados_id,deleteEmpleados,updateEmpleados} from '@helpers/Empleos';
-import {insertEmpleado} from '@helpers/auth'
-import {FieldsValidation_signUpEmpleados,FieldsValidation_updateEmpleados,checkResult} from '@validations/fields'
+import { getEmpleados,getEmpleados_id,deleteEmpleados,updateEmpleados} from '@helpers/empleados.helper';
+import {insertEmpleado} from '@helpers/auth.helper'
+import {fieldsValidationSignUpEmpleados,fieldsValidationUpdateEmpleados,checkResult} from '@validations/fields'
 
 const router = Router();
 
@@ -24,7 +24,7 @@ router.get('/:id', async(req,res)=>{
     }
 });
 
-router.post('/registrar',FieldsValidation_signUpEmpleados,checkResult,async(req,res)=>{
+router.post('/registrar',fieldsValidationSignUpEmpleados,checkResult,async(req,res)=>{
     try {
         const data = await insertEmpleado(req.body);
         res.status(200).json({ status: 200, usuarios: data, message: 'Empleado agregado!' });
@@ -33,7 +33,7 @@ router.post('/registrar',FieldsValidation_signUpEmpleados,checkResult,async(req,
     }
 })
 
-router.put('/:id',FieldsValidation_updateEmpleados,checkResult,async(req,res)=>{
+router.put('/:id',fieldsValidationUpdateEmpleados,checkResult,async(req,res)=>{
     const {id}=req.params;
     try {
         const data = await updateEmpleados({emple: req.body, ide:+id});

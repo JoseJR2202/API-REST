@@ -1,18 +1,18 @@
 import Pool from '@utils/pool';
-import {querys_empleados} from '@utils/querys';
-import { Empleados,EmpleadosLogin } from '@interfaces/Empleado';
+import {querysEmpleados} from '@utils/querys';
+import { empleado,empleadoLogin } from '@interfaces/empleado';
 import { PoolClient } from 'pg';
 
 const pool = Pool.getInstance();
 
 //obtener la lista de empleados
-export const getEmpleados= async (): Promise<Empleados[]> =>{
+export const getEmpleados= async (): Promise<empleado[]> =>{
     const client: PoolClient = await pool.connect();
     try {
-        const response= (await client.query(querys_empleados.GET_empleados)).rows;
-        const empleados: Empleados[]= response.map((rows)=>{
+        const response= (await client.query(querysEmpleados.GET_empleados)).rows;
+        const empleados: empleado[]= response.map((rows)=>{
             return{
-                id:rows.id_empleados,
+                id:rows.id_empleado,
                 nombre:rows.nombre,
                 correo:rows.correo,
                 telefono:rows.telefono
@@ -27,12 +27,12 @@ export const getEmpleados= async (): Promise<Empleados[]> =>{
 }
 
 //obtener empleado por su id
-export const getEmpleados_id= async ( id: number ): Promise<Empleados> =>{
+export const getEmpleados_id= async ( id: number ): Promise<empleado> =>{
     const client: PoolClient = await pool.connect();
     try {
-        const response= (await client.query(querys_empleados.GET_empleados_BY_ID,[id])).rows[0];
-        const empleados: Empleados= {
-                id:response.id_empleados,
+        const response= (await client.query(querysEmpleados.GET_empleados_BY_ID,[id])).rows[0];
+        const empleados: empleado= {
+                id:response.id_empleado,
                 nombre:response.nombre,
                 correo:response.correo,
                 telefono:response.telefono
@@ -46,12 +46,12 @@ export const getEmpleados_id= async ( id: number ): Promise<Empleados> =>{
 }
 
 //obtener empleados por su nombres... cuestionable la utilidad de esta
-export const getEmpleados_correo= async ( nombre: string ): Promise<EmpleadosLogin> =>{
+export const getEmpleados_correo= async ( nombre: string ): Promise<empleadoLogin> =>{
     const client: PoolClient = await pool.connect();
     try {
-        const response= (await client.query(querys_empleados.GET_empleados_BY_CORREO,[nombre])).rows[0];
-        const empleados: EmpleadosLogin= {
-                id:response.id_empleados,
+        const response= (await client.query(querysEmpleados.GET_empleados_BY_CORREO,[nombre])).rows[0];
+        const empleados: empleadoLogin= {
+                id:response.id_empleado,
                 nombre:response.nombre,
                 correo:response.correo,
                 telefono:response.telefono,
@@ -66,14 +66,14 @@ export const getEmpleados_correo= async ( nombre: string ): Promise<EmpleadosLog
 }
 
 //actualizar empleado
-export const updateEmpleados= async ({ emple, ide }: { emple: Empleados; ide: number }): Promise<Empleados> =>{
+export const updateEmpleados= async ({ emple, ide }: { emple: empleado; ide: number }): Promise<empleado> =>{
     const {nombre,correo,telefono}= emple;
     const client: PoolClient = await pool.connect();
     try {
         await client.query('BEGIN');
-        const response= (await client.query(querys_empleados.UPDATE_empleados,[nombre,correo,telefono,ide])).rows[0];
-        const empleados: Empleados= {
-                id:response.id_empleados,
+        const response= (await client.query(querysEmpleados.UPDATE_empleados,[nombre,correo,telefono,ide])).rows[0];
+        const empleados: empleado= {
+                id:response.id_empleado,
                 nombre:response.nombre,
                 correo:response.correo,
                 telefono:response.telefono
@@ -93,7 +93,7 @@ export const deleteEmpleados= async ( id: number ): Promise<boolean> =>{
     const client: PoolClient = await pool.connect();
     try {
         await client.query('BEGIN');
-        const response= (await client.query(querys_empleados.DELETE_empleados,[id])).rowCount>0;
+        const response= (await client.query(querysEmpleados.DELETE_empleados,[id])).rowCount>0;
         await client.query('COMMIT');
         return response;
     } catch (e) {

@@ -1,21 +1,21 @@
 //Proximos helpers aqui
 import Pool from '@utils/pool';
-import {querys_empleados} from '@utils/querys';
+import {querysEmpleados} from '@utils/querys';
 import { compare, genSaltSync, hashSync } from 'bcryptjs';
-import { EmpleadosLogin } from '@interfaces/Empleado';
+import { empleadoLogin } from '@interfaces/empleado';
 import { PoolClient } from 'pg';
 
 const pool = Pool.getInstance();
 
-export const insertEmpleado= async (emp: EmpleadosLogin): Promise<EmpleadosLogin> =>{
+export const insertEmpleado= async (emp: empleadoLogin): Promise<empleadoLogin> =>{
     const {nombre,correo,telefono,contrasena}= emp;
     const client: PoolClient = await pool.connect();
     try {
         await client.query('BEGIN');
         const salt = genSaltSync(10);
         const hashedPassword = hashSync(contrasena, salt);
-        const response= (await client.query(querys_empleados.SIGN_UP_empleados,[nombre,correo,hashedPassword,telefono])).rows[0];
-        const empleados: EmpleadosLogin= {
+        const response= (await client.query(querysEmpleados.SIGN_UP_empleados,[nombre,correo,hashedPassword,telefono])).rows[0];
+        const empleados: empleadoLogin= {
             id:response.id_empleados,
             nombre:response.nombre,
             correo:response.correo,

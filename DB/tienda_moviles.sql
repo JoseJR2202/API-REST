@@ -14,8 +14,8 @@ CREATE TABLE "producto" (
   "id_proveedor" integer
 );
 
-CREATE TABLE "empleados" (
-  "id_empleados" SERIAL PRIMARY KEY,
+CREATE TABLE "empleado" (
+  "id_empleado" SERIAL PRIMARY KEY,
   "nombre" varchar,
   "correo" varchar,
   "contrasena" varchar,

@@ -1,3 +1,3 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-//# sourceMappingURL=Proveedor.js.map
+//# sourceMappingURL=proveedor.js.map

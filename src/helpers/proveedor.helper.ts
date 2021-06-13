@@ -1,18 +1,18 @@
 import Pool from '@utils/pool';
-import {querys_proveedor} from '@utils/querys';
-import { Proveedor } from '@interfaces/Proveedor';
+import {querysProveedor} from '@utils/querys';
+import { proveedor } from '@interfaces/proveedor';
 import { PoolClient } from 'pg';
 
 const pool = Pool.getInstance();
 
 //agregar un proveedor
-export const insertProveedor= async (prov: Proveedor): Promise<Proveedor> =>{
+export const insertProveedor= async (prov: proveedor): Promise<proveedor> =>{
     const {nombre,contacto,direccion}= prov;
     const client: PoolClient = await pool.connect();
     try {
         await client.query('BEGIN');
-        const response= (await client.query(querys_proveedor.SIGN_UP_proveedor,[nombre,contacto,direccion])).rows[0];
-        const proveedor: Proveedor= {
+        const response= (await client.query(querysProveedor.SIGN_UP_proveedor,[nombre,contacto,direccion])).rows[0];
+        const proveedor: proveedor= {
             id:response.id_producto,
             nombre:response.nombre,
             contacto:response.contacto,
@@ -29,11 +29,11 @@ export const insertProveedor= async (prov: Proveedor): Promise<Proveedor> =>{
 }
 
 //obtener la lista de Proveedor
-export const getProveedores= async (): Promise<Proveedor[]> =>{
+export const getProveedores= async (): Promise<proveedor[]> =>{
     const client: PoolClient = await pool.connect();
     try {
-        const response= (await client.query(querys_proveedor.GET_proveedor)).rows;
-        const proveedor: Proveedor[]= response.map((rows)=>{
+        const response= (await client.query(querysProveedor.GET_proveedor)).rows;
+        const proveedor: proveedor[]= response.map((rows)=>{
             return{
                 id:rows.id_proveedor,
                 nombre:rows.nombre,
@@ -50,11 +50,11 @@ export const getProveedores= async (): Promise<Proveedor[]> =>{
 }
 
 //obtener Proveedor por su id
-export const getProveedor_id= async ( id: number ): Promise<Proveedor> =>{
+export const getProveedor_id= async ( id: number ): Promise<proveedor> =>{
     const client: PoolClient = await pool.connect();
     try {
-        const response= (await client.query(querys_proveedor.GET_proveedor_BY_ID,[id])).rows[0];
-        const proveedor: Proveedor= {
+        const response= (await client.query(querysProveedor.GET_proveedor_BY_ID,[id])).rows[0];
+        const proveedor: proveedor= {
                 id:response.id_proveedor,
                 nombre:response.nombre,
                 contacto:response.contacto,
@@ -69,13 +69,13 @@ export const getProveedor_id= async ( id: number ): Promise<Proveedor> =>{
 }
 
 //actualizar Proveedor
-export const updateProveedor= async ({ prov, ide }: { prov: Proveedor; ide: number }): Promise<Proveedor> =>{
+export const updateProveedor= async ({ prov, ide }: { prov: proveedor; ide: number }): Promise<proveedor> =>{
     const {nombre,contacto,direccion}= prov;
     const client: PoolClient = await pool.connect();
     try {
         await client.query('BEGIN');
-        const response= (await client.query(querys_proveedor.UPDATE_proveedor,[nombre,contacto,direccion,ide])).rows[0];
-        const empleados: Proveedor= {
+        const response= (await client.query(querysProveedor.UPDATE_proveedor,[nombre,contacto,direccion,ide])).rows[0];
+        const empleados: proveedor= {
                 id:response.id_proveedor,
                 nombre:response.nombre,
                 contacto:response.contacto,
@@ -96,7 +96,7 @@ export const deleteProveedor= async ( id: number ): Promise<boolean> =>{
     const client: PoolClient = await pool.connect();
     try {
         await client.query('BEGIN');
-        const response= (await client.query(querys_proveedor.DELETE_proveedor,[id])).rowCount>0;
+        const response= (await client.query(querysProveedor.DELETE_proveedor,[id])).rowCount>0;
         await client.query('COMMIT');
         return response;
     } catch (e) {

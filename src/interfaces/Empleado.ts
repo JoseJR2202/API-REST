@@ -1,11 +1,11 @@
-export interface Empleados {
+export interface empleado {
     id: number;
     nombre: string;
     correo: string;
     telefono: string;
   }
   
-  export interface EmpleadosLogin extends Empleados {
+  export interface empleadoLogin extends empleado {
     contrasena: string;
   }
   
