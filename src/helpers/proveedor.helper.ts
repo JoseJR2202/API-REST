@@ -50,7 +50,7 @@ export const getProveedores= async (): Promise<proveedor[]> =>{
 }
 
 //obtener Proveedor por su id
-export const getProveedor_id= async ( id: number ): Promise<proveedor> =>{
+export const getProveedorID= async ( id: number ): Promise<proveedor> =>{
     const client: PoolClient = await pool.connect();
     try {
         const response= (await client.query(querysProveedor.GET_proveedor_BY_ID,[id])).rows[0];

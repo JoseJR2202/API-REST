@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteEmpleados = exports.updateEmpleados = exports.getEmpleados_correo = exports.getEmpleados_id = exports.getEmpleados = void 0;
+exports.deleteEmpleados = exports.updateEmpleados = exports.getEmpleadosCorreo = exports.getEmpleadosId = exports.getEmpleados = void 0;
 const pool_1 = __importDefault(require("@utils/pool"));
 const querys_1 = require("@utils/querys");
 const pool = pool_1.default.getInstance();
@@ -30,7 +30,7 @@ exports.getEmpleados = async () => {
     }
 };
 //obtener empleado por su id
-exports.getEmpleados_id = async (id) => {
+exports.getEmpleadosId = async (id) => {
     const client = await pool.connect();
     try {
         const response = (await client.query(querys_1.querysEmpleados.GET_empleados_BY_ID, [id])).rows[0];
@@ -50,7 +50,7 @@ exports.getEmpleados_id = async (id) => {
     }
 };
 //obtener empleados por su nombres... cuestionable la utilidad de esta
-exports.getEmpleados_correo = async (nombre) => {
+exports.getEmpleadosCorreo = async (nombre) => {
     const client = await pool.connect();
     try {
         const response = (await client.query(querys_1.querysEmpleados.GET_empleados_BY_CORREO, [nombre])).rows[0];

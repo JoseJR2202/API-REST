@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import {getProductos,getProductos_ID,insertProducto,updateProductos,deleteProducto} from '@helpers/producto.helper'
+import {getProductos,getProductosID,insertProducto,updateProductos,deleteProducto} from '@helpers/producto.helper'
 import {fieldsValidationProductos,fieldsValidationProductosNuevo,checkResult} from '@validations/fields'
 
 const router = Router();
@@ -16,7 +16,7 @@ router.get('/', async(req,res)=>{
 router.get('/:id', async(req,res)=>{
     const {id}=req.params;
     try {
-        const data = await getProductos_ID(+id);
+        const data = await getProductosID(+id);
         res.status(200).json({ status: 200, producto: data, message: 'Producto obtenido!' });
     } catch (e) {
         res.status(500).json({ status: 500, error: e, message: 'Error al obtener el producto' });

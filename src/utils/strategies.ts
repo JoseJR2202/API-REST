@@ -1,5 +1,5 @@
 import { comparePassword } from '@helpers/auth.helper';
-import {getEmpleados_correo} from '@helpers/empleados.helper'
+import {getEmpleadosCorreo} from '@helpers/empleados.helper'
 import { Strategy as Local } from 'passport-local';
 import { Strategy as JWT, ExtractJwt } from 'passport-jwt';
 import { encode } from 'jwt-simple';
@@ -11,7 +11,7 @@ const localOptions = {
 
 const LocalStrategy = new Local(localOptions, async (correo, contrasena, done) => {
   try {
-    const user = await getEmpleados_correo(correo);
+    const user = await getEmpleadosCorreo(correo);
     if (!user) return done(null, false);
     const isMatch = await comparePassword(contrasena, user.contrasena);
     console.log(isMatch)

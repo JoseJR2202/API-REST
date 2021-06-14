@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteProducto = exports.updateProductos = exports.getProductos_ID = exports.getProductos = exports.insertProducto = void 0;
+exports.deleteProducto = exports.updateProductos = exports.getProductosID = exports.getProductos = exports.insertProducto = void 0;
 const pool_1 = __importDefault(require("@utils/pool"));
 const querys_1 = require("@utils/querys");
 const pool = pool_1.default.getInstance();
@@ -58,7 +58,7 @@ exports.getProductos = async () => {
     }
 };
 //obtener un producto por su id
-exports.getProductos_ID = async (id) => {
+exports.getProductosID = async (id) => {
     const client = await pool.connect();
     try {
         const response = (await client.query(querys_1.querysProducto.GET_producto_BY_ID, [id])).rows[0];

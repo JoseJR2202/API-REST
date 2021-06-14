@@ -1,7 +1,7 @@
 import { empleado, empleadoLogin } from '@interfaces/empleado';
 export declare const getEmpleados: () => Promise<empleado[]>;
-export declare const getEmpleados_id: (id: number) => Promise<empleado>;
-export declare const getEmpleados_correo: (nombre: string) => Promise<empleadoLogin>;
+export declare const getEmpleadosId: (id: number) => Promise<empleado>;
+export declare const getEmpleadosCorreo: (nombre: string) => Promise<empleadoLogin>;
 export declare const updateEmpleados: ({ emple, ide }: {
     emple: empleado;
     ide: number;

@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const data = await empleados_helper_1.getEmpleados_id(+id);
+        const data = await empleados_helper_1.getEmpleadosId(+id);
         res.status(200).json({ status: 200, usuarios: data, message: 'Empleado obtenido!' });
     }
     catch (e) {

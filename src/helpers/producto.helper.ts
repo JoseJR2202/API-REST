@@ -54,7 +54,7 @@ export const getProductos= async (): Promise<productoDetalles[]> =>{
 }
 
 //obtener un producto por su id
-export const getProductos_ID= async ( id: number ): Promise<productoDetalles> =>{
+export const getProductosID= async ( id: number ): Promise<productoDetalles> =>{
     const client: PoolClient = await pool.connect();
     try {
         const response= (await client.query(querysProducto.GET_producto_BY_ID,[id])).rows[0];

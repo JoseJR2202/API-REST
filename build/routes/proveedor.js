@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const data = await proveedor_helper_1.getProveedor_id(+id);
+        const data = await proveedor_helper_1.getProveedorID(+id);
         res.status(200).json({ status: 200, Proveedor: data, message: 'Proveedor obtenido!' });
     }
     catch (e) {

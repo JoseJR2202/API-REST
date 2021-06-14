@@ -27,7 +27,7 @@ export const getEmpleados= async (): Promise<empleado[]> =>{
 }
 
 //obtener empleado por su id
-export const getEmpleados_id= async ( id: number ): Promise<empleado> =>{
+export const getEmpleadosId= async ( id: number ): Promise<empleado> =>{
     const client: PoolClient = await pool.connect();
     try {
         const response= (await client.query(querysEmpleados.GET_empleados_BY_ID,[id])).rows[0];
@@ -46,7 +46,7 @@ export const getEmpleados_id= async ( id: number ): Promise<empleado> =>{
 }
 
 //obtener empleados por su nombres... cuestionable la utilidad de esta
-export const getEmpleados_correo= async ( nombre: string ): Promise<empleadoLogin> =>{
+export const getEmpleadosCorreo= async ( nombre: string ): Promise<empleadoLogin> =>{
     const client: PoolClient = await pool.connect();
     try {
         const response= (await client.query(querysEmpleados.GET_empleados_BY_CORREO,[nombre])).rows[0];

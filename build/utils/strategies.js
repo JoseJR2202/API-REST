@@ -12,7 +12,7 @@ const localOptions = {
 };
 const LocalStrategy = new passport_local_1.Strategy(localOptions, async (correo, contrasena, done) => {
     try {
-        const user = await empleados_helper_1.getEmpleados_correo(correo);
+        const user = await empleados_helper_1.getEmpleadosCorreo(correo);
         if (!user)
             return done(null, false);
         const isMatch = await auth_helper_1.comparePassword(contrasena, user.contrasena);
